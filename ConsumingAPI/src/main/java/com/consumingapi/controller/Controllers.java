@@ -65,7 +65,7 @@ public class Controllers {
 		} else {
 			model.addAttribute("stats", stats);
 			model.addAttribute("total", countryData);
-			model.addAttribute("country", country);
+			model.addAttribute("country", countryName);
 			return "covid19";
 		}
 	}
