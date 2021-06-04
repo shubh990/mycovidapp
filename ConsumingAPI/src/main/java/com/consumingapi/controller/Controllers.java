@@ -30,7 +30,7 @@ public class Controllers {
 	
 	CountryData countryData;
 	
-	String country;
+	String countryName;
 
 	@GetMapping("/")
 	public String home() {
@@ -44,9 +44,10 @@ public class Controllers {
 	@RequestMapping("/country")
 	public String country(@RequestParam("country") String country, Model model) {
 
+		String countryName = firstLetterUppercase(country);
 		model.addAttribute("title", "Covid19");
-		serviceClass.setUrlname(country);
-		this.country = country;
+		serviceClass.setUrlname(countryName);
+		this.countryName = countryName;
 		
 		try {
 			coviddata = serviceClass.Totals();
@@ -75,7 +76,7 @@ public class Controllers {
 
 		model.addAttribute("stats", stats);
 		model.addAttribute("total", countryData);
-		model.addAttribute("country", country);
+		model.addAttribute("country", countryName);
 		return "covid19";
 	}
 	
@@ -85,7 +86,7 @@ public class Controllers {
 
 		model.addAttribute("stats", stats);
 		model.addAttribute("total", countryData);
-		model.addAttribute("country", country);
+		model.addAttribute("country", countryName);
 		return "covid19";
 	}
 
@@ -96,7 +97,7 @@ public class Controllers {
 
 		model.addAttribute("stats", stats);
 		model.addAttribute("total", countryData);
-		model.addAttribute("country", country);
+		model.addAttribute("country", countryName);
 		return "covid19";
 	}
 
@@ -107,7 +108,7 @@ public class Controllers {
 
 		model.addAttribute("stats", stats);
 		model.addAttribute("total", countryData);
-		model.addAttribute("country", country);
+		model.addAttribute("country", countryName);
 		return "covid19";
 	}
 	//lol
@@ -117,7 +118,7 @@ public class Controllers {
 
 		model.addAttribute("stats", stats);
 		model.addAttribute("total", countryData);
-		model.addAttribute("country", country);
+		model.addAttribute("country", countryName);
 		return "covid19";
 	}
 	
@@ -125,6 +126,14 @@ public class Controllers {
 	public String about(Model model){
 		model.addAttribute("title", "About");
 		return "about";
+	}
+	
+	public String firstLetterUppercase(String country) {
+		String firstLetter = country.substring(0, 1);
+		String remaingLetter = country.substring(1);
+		firstLetter = firstLetter.toUpperCase();
+		remaingLetter = remaingLetter.toLowerCase();
+		return firstLetter + remaingLetter;
 	}
 
 }
